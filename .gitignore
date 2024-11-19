@@ -1,1 +1,14 @@
-.venv
+# Direktori virtual environment
+.venv/
+
+# File konfigurasi editor
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# File dan direktori cache Python
+__pycache__/
+
+# File log
+*.log
