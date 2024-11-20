@@ -1,0 +1,129 @@
+{% extends 'base_dosen.html' %}
+
+{% block content %}
+<!-- Konten spesifik halaman ini -->
+<div class="container-fluid">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-body p-4">
+          <h5 class="card-title fw-semibold mb-4">Recent Transactions</h5>
+          <div class="table-responsive">
+            <table class="table text-nowrap mb-0 align-middle">
+              <thead class="text-dark fs-4">
+                <tr>
+                  <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">NIM</h6>
+                  </th>
+                  <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">Location:</h6>
+                  </th>
+                  <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">Name:</h6>
+                  </th>
+                  <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">Status</h6>
+                  </th>
+                  <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">Budget</h6>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for student in stud_iisma %}
+                <tr>
+                  <td class="border-bottom-0"><h6 class="fw-semibold mb-0">{{ student[0].nim }}</h6></td>
+                  <td class="border-bottom-0">
+                      <h6 class="fw-semibold mb-1">{{ student[0].location}}</h6>
+                      <span class="fw-normal">Web Designer</span>                          
+                  </td>
+                  <td class="border-bottom-0">
+                    <p class="mb-0 fw-normal">{{ student[1].nama }}</p>
+                  </td>
+                  <td class="border-bottom-0">
+                    <div class="d-flex align-items-center gap-2">
+                    {% if student[0].status == 'interested' %}
+                      <span class="badge bg-purple rounded-3 fw-semibold">{{student[0].status}}</span>
+                    {% elif student[0].status == 'applying' %}
+                      <span class="badge bg-primary rounded-3 fw-semibold">{{student[0].status}}</span>
+                    {% elif student[0].status == 'accepted' %}
+                      <span class="badge bg-success rounded-3 fw-semibold">{{student[0].status}}</span>
+                    {% elif student[0].status == 'boarding' %}
+                      <span class="badge bg-danger rounded-3 fw-semibold">{{student[0].status}}</span>
+                    {% elif student[0].status == 'on going' %}
+                      <span class="badge bg-warning rounded-3 fw-semibold">{{student[0].status}}</span>
+                    {% elif student[0].status == 'finished' %}
+                      <span class="badge bg-success rounded-3 fw-semibold">{{student[0].status}}</span>
+                    {% else %}
+                      <span class="badge bg-secondary rounded-3 fw-semibold">{{student[0].status}}</span>
+                    {% endif %}
+                    </div>
+                  </td>
+                  <td class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0 fs-4">Detail</h6>
+                  </td>
+                </tr> 
+                {% endfor %}
+                <!-- <tr>
+                  <td class="border-bottom-0"><h6 class="fw-semibold mb-0">2</h6></td>
+                  <td class="border-bottom-0">
+                      <h6 class="fw-semibold mb-1">Andrew McDownland</h6>
+                      <span class="fw-normal">Project Manager</span>                          
+                  </td>
+                  <td class="border-bottom-0">
+                    <p class="mb-0 fw-normal">Real Homes WP Theme</p>
+                  </td>
+                  <td class="border-bottom-0">
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="badge bg-secondary rounded-3 fw-semibold">Medium</span>
+                    </div>
+                  </td>
+                  <td class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0 fs-4">$24.5k</h6>
+                  </td>
+                </tr> 
+                <tr>
+                  <td class="border-bottom-0"><h6 class="fw-semibold mb-0">3</h6></td>
+                  <td class="border-bottom-0">
+                      <h6 class="fw-semibold mb-1">Christopher Jamil</h6>
+                      <span class="fw-normal">Project Manager</span>                          
+                  </td>
+                  <td class="border-bottom-0">
+                    <p class="mb-0 fw-normal">MedicalPro WP Theme</p>
+                  </td>
+                  <td class="border-bottom-0">
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="badge bg-danger rounded-3 fw-semibold">High</span>
+                    </div>
+                  </td>
+                  <td class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0 fs-4">$12.8k</h6>
+                  </td>
+                </tr>      
+                <tr>
+                  <td class="border-bottom-0"><h6 class="fw-semibold mb-0">4</h6></td>
+                  <td class="border-bottom-0">
+                      <h6 class="fw-semibold mb-1">Nirav Joshi</h6>
+                      <span class="fw-normal">Frontend Engineer</span>                          
+                  </td>
+                  <td class="border-bottom-0">
+                    <p class="mb-0 fw-normal">Hosting Press HTML</p>
+                  </td>
+                  <td class="border-bottom-0">
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="badge bg-success rounded-3 fw-semibold">Critical</span>
+                    </div>
+                  </td>
+                  <td class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0 fs-4">$2.4k</h6>
+                  </td>
+                </tr>                        -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
