@@ -1,5 +1,6 @@
 from flask import flash, render_template, request, redirect, url_for, session, make_response
 from models import User, Mahasiswa, ExchangeOutbound, Bpp
+from collections import Counter
 from datetime import datetime
 
 def register_routes(app, db):
@@ -51,8 +52,41 @@ def register_routes(app, db):
         role = session.get('role')
         if role == "mahasiswa":
             return render_template('home_mahasiswa.html')
+        
         elif role == "dosen":
-            return render_template('home_dosen.html')
+            all_iisma = db.session.query(ExchangeOutbound).filter(ExchangeOutbound.jenis_exchange == 'IISMA').count()
+            all_exch = db.session.query(ExchangeOutbound).filter(ExchangeOutbound.jenis_exchange == 'student exchange').count()
+
+
+            return render_template('home_dosen.html', all_exch=all_exch, all_iisma=all_iisma)
+
+    @app.route('/ExchangeIISMA', methods=['GET'])
+    def testing():
+        query = db.session.query(ExchangeOutbound.nim, ExchangeOutbound.intake_year, ExchangeOutbound.jenis_exchange).all()
+        intake_years = [i[1] for i in query]
+        jenis_exch = [i[2] for i in query]
+        
+        jenis_per_year = {}
+        for year in set(intake_years):
+            jenis_per_year[year] = dict(Counter([status for i, status in enumerate(jenis_exch) if intake_years[i] == year]))
+        labels = list(jenis_per_year.keys())
+        dataset_jenis = ["IISMA","student exchange"]
+
+        datasets = []
+        for jenis in dataset_jenis:
+            data = [jenis_per_year.get(year, {}).get(jenis,0) for year in labels]
+            datasets.append({
+                'label': jenis,
+                'data': data
+            })
+        
+        result = {
+            "labels":labels,
+            "datasets":datasets
+        }
+        return result
+    
+    @app.route('/testing')
     
     @app.route('/IISMA', methods=['GET', 'POST'])
     def iisma():

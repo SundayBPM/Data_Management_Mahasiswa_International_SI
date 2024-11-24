@@ -27,7 +27,7 @@ class ExchangeOutbound(db.Model):
     student_folder = db.Column(db.Integer, nullable=True)
     status = db.Column(db.String, nullable=True)
     location = db.Column(db.String, nullable=True)
-    intake_year = db.Column(db.Date, nullable=True)
+    intake_year = db.Column(db.String, nullable=True)
     intake = db.Column(db.Date, nullable=True)
     from_date = db.Column(db.Date, nullable=True)
     until = db.Column(db.Date, nullable=True)
@@ -40,6 +40,18 @@ class ExchangeOutbound(db.Model):
     folder = db.Column(db.String, nullable=True)
     jenis_exchange = db.Column(db.String, nullable=True)
     student_detail = db.Column(db.String, nullable=True)
+    
+    def to_dict(self):
+        return {
+            "nim":self.nim,
+            "status":self.status,
+            "location":self.location,
+            "intake_year":self.intake_year,
+            "intake":self.intake,
+            "from_date":self.from_date,
+            "until":self.until,
+            "jenis_exchange":self.jenis_exchange
+        }
 
 class Bpp(db.Model):
     __tablename__ = 'bpp'
