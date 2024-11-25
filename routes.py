@@ -2,6 +2,7 @@ from flask import flash, render_template, request, redirect, url_for, session, m
 from models import User, Mahasiswa, ExchangeOutbound, Bpp
 from collections import Counter
 from datetime import datetime
+from sqlalchemy import func
 
 def register_routes(app, db):
 
@@ -61,7 +62,7 @@ def register_routes(app, db):
             return render_template('home_dosen.html', all_exch=all_exch, all_iisma=all_iisma)
 
     @app.route('/ExchangeIISMA', methods=['GET'])
-    def testing():
+    def ExchangeIISMA():
         query = db.session.query(ExchangeOutbound.nim, ExchangeOutbound.intake_year, ExchangeOutbound.jenis_exchange).all()
         intake_years = [i[1] for i in query]
         jenis_exch = [i[2] for i in query]
@@ -86,7 +87,37 @@ def register_routes(app, db):
         }
         return result
     
-    @app.route('/testing')
+    @app.route('/status-count', methods=['GET'])
+    def status_count():
+        result = db.session.query(
+            func.count(ExchangeOutbound.status).label('status_count'),
+            ExchangeOutbound.status,
+            ExchangeOutbound.intake_year
+            ).filter(ExchangeOutbound.intake_year=='2024').group_by(ExchangeOutbound.status).all()
+        
+        labels = [label[1] for label in result]
+        data = [data[0] for data in result]
+
+        dataset = {
+            'labels': labels,
+            'datasets': [{
+                'data': data
+            }]
+        }
+        return dataset
+
+    @app.route('/testing', methods=['GET', 'POST'])
+    def testing():
+        result = db.session.query(
+            func.count(ExchangeOutbound.status).label('status_count'),
+            ExchangeOutbound.status,
+            ExchangeOutbound.intake_year
+            ).filter(ExchangeOutbound.intake_year=='2024').group_by(ExchangeOutbound.status).all()
+        labels = [label[1] for label in result]
+        data = [data[0] for data in result]
+        print(data)
+        print(result)
+        return "None"
     
     @app.route('/IISMA', methods=['GET', 'POST'])
     def iisma():

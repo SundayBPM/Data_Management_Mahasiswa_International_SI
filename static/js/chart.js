@@ -1,8 +1,8 @@
 fetch('/ExchangeIISMA')
     .then(response => response.json())
     .then(data => {
-        var ctx = document.getElementById('lineChart').getContext('2d');
-        var line_chart = new Chart(ctx, {
+        let id_element = document.getElementById('lineChart').getContext('2d');
+        let line_chart = new Chart(id_element, {
             type: 'line',
             data: data,
             options: {
@@ -20,15 +20,56 @@ fetch('/ExchangeIISMA')
         })
     })
 
-function makePieChart(labels, data, id, title) {
-    const get_id = document.getElementById(id);
-    new Chart(get_id, {
-        type: 'pie',
-        data: {
-            labels: labels,
-            datasets: [{
-
-            }]
-        }
+fetch('/status-count')
+    .then(response => response.json())
+    .then(data => {
+        let id_element = document.getElementById('pieChart_status').getContext('2d')
+        let pie_chart = new Chart(id_element, {
+            type: 'pie',
+            data: data,
+            options: {
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'right'
+                    }
+                }
+            }
+        })
     })
-}
+    
+fetch('/status-count')
+    .then(response => response.json())
+    .then(data => {
+        let id_element = document.getElementById('pieChart_status2').getContext('2d')
+        let pie_chart = new Chart(id_element, {
+            type: 'pie',
+            data: data,
+            options: {
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'right'
+                    }
+                }
+            }
+        })
+    })
+
+fetch('/status-count')
+    .then(response => response.json())
+    .then(data => {
+        let id_element = document.getElementById('pieChart_status3').getContext('2d')
+        let pie_chart = new Chart(id_element, {
+            type: 'pie',
+            data: data,
+            options: {
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'right'
+                    }
+                }
+            }
+        })
+    })
