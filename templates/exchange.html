@@ -16,17 +16,22 @@
             <div class="card-body">
               <div class="mb-3">
                 <label for="nama" class="form-label">nama: </label>
-                <input type="text" class="form-control" id="nama" name="nama" value="{{ student_inf.nama }}" readonly aria-describedby="emailHelp" style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;" >
+                <input type="text" class="form-control" id="nama" name="nama" value="{{ student_inf.nama }}" readonly aria-describedby="emailHelp">
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
                 <label for="nim" class="form-label">NIM:</label>
-                <input type="text" class="form-control" id="nim" name="nim" value="{{ student_inf.nim }}" readonly aria-describedby="emailHelp" style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;" >
+                <input type="text" class="form-control" id="nim" name="nim" value="{{ student_inf.nim }}" readonly aria-describedby="emailHelp">
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
                 <label for="wali" class="form-label">Wali:</label>
-                <input type="text" class="form-control" id="wali" name="wali" value="{{ student_inf.wali }}" readonly aria-describedby="emailHelp" style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;" >
+                <input type="text" class="form-control" id="wali" name="wali" value="{{ student_inf.wali }}" readonly aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+              </div>
+              <div class="mb-3">
+                <label for="location" class="form-label">Location:</label>
+                <input type="text" class="form-control" id="location" name="location" value="{{ iisma_inf.location}}" readonly aria-describedby="emailHelp">
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
             </div>
@@ -49,16 +54,6 @@
                 <input type="text" class="form-control" id="status" name="status" value="{{iisma_inf.status}}" readonly aria-describedby="emailHelp">
                 {% endif %}
                 <!-- <label for="status" class="form-label">Status: </label> -->
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-              </div>
-              <div class="mb-3">
-                <label for="location" class="form-label">Location:</label>
-                <input type="text" class="form-control" id="location" name="location" value="{{ iisma_inf.location}}" aria-describedby="emailHelp" {% if session.get('role') == 'mahasiswa' %} readonly style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;" {% endif %}>
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-              </div>
-              <div class="mb-3">
-                <label for="intake_year" class="form-label">University:</label>
-                <input type="text" class="form-control" id="intake_year" name="intake_year" value="{{iisma_inf.intake_year}}" aria-describedby="emailHelp" {% if session.get('role') == 'mahasiswa' %} readonly style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;" {% endif %}>
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
@@ -160,8 +155,6 @@
     </div>
   </div>
 </div>
-<!-- <h1>{{student_inf}}</h1>
-<h1>{{iisma_inf}}</h1> -->
 <input type="hidden" id="role" value="{{ session.get('role') }}">
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 {% endblock %}
