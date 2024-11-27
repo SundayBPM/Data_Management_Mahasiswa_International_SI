@@ -38,7 +38,7 @@ fetch('/status-count')
         })
     })
     
-fetch('/status-count')
+fetch('/most-preferred-country-count')
     .then(response => response.json())
     .then(data => {
         let id_element = document.getElementById('pieChart_status2').getContext('2d')
