@@ -27,7 +27,7 @@ class ExchangeOutbound(db.Model):
     student_folder = db.Column(db.Integer, nullable=True)
     status = db.Column(db.String, nullable=True)
     location = db.Column(db.String, nullable=True)
-    # univ = db.Column(db.String, nullable=True)
+    univ = db.Column(db.String, nullable=True)
     intake_year = db.Column(db.String, nullable=True)
     intake = db.Column(db.Date, nullable=True)
     from_date = db.Column(db.Date, nullable=True)

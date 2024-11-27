@@ -57,28 +57,28 @@
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
-                <label for="intake_year" class="form-label">University:</label>
-                <input type="text" class="form-control" id="intake_year" name="intake_year" value="{{iisma_inf.intake_year}}" aria-describedby="emailHelp" {% if session.get('role') == 'mahasiswa' %} readonly style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;" {% endif %}>
+                <label for="univ" class="form-label">University:</label>
+                <input type="text" class="form-control" id="univ" name="univ" value="{{iisma_inf.univ}}" aria-describedby="emailHelp" {% if session.get('role') == 'mahasiswa' %} readonly style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;" {% endif %}>
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
                 <label for="intake_year" class="form-label">Intake Year:</label>
-                <input type="text" class="form-control" id="intake_year" name="intake_year" value="{{iisma_inf.intake_year}}" aria-describedby="emailHelp">
+                <input type="text" class="form-control" id="intake_year" name="intake_year" value="{{iisma_inf.intake_year}}" aria-describedby="emailHelp" {% if session.get('role') == 'mahasiswa' %} readonly style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;" {% endif %}>
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
                 <label for="intake" class="form-label">Intake:</label>
-                <input type="date" class="form-control" id="intake" value="{{iisma_inf.intake}}" name="intake" aria-describedby="emailHelp">
+                <input type="date" class="form-control" id="intake" value="{{iisma_inf.intake}}" name="intake" aria-describedby="emailHelp" {% if session.get('role') == 'mahasiswa' %} readonly style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;" {% endif %}>
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
                 <label for="from" class="form-label">From:</label>
-                <input type="date" class="form-control" id="from" name="from" value="{{ iisma_inf.from_date }}" aria-describedby="emailHelp">
+                <input type="date" class="form-control" id="from" name="from" value="{{ iisma_inf.from_date }}" aria-describedby="emailHelp" {% if session.get('role') == 'mahasiswa' %} readonly style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;" {% endif %}>
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
                 <label for="until" class="form-label">Until:</label>
-                <input type="date" class="form-control" id="until" value="{{ iisma_inf.until }}" name="until" aria-describedby="emailHelp">
+                <input type="date" class="form-control" id="until" value="{{ iisma_inf.until }}" name="until" aria-describedby="emailHelp" {% if session.get('role') == 'mahasiswa' %} readonly style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;" {% endif %}>
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
             </div>
