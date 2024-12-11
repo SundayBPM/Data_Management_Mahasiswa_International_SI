@@ -14,6 +14,9 @@ def create_app(config_name='default'):
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database_mahasiswa.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+    app.config['UPLOAD_DIRECTORY'] = 'static/uploads/'
+    app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 #16MB
+    app.config['ALLOWED_EXTENSIONS'] = ['.pdf']
     # app.config['SESSION_PERMANENT'] = False
     # app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
     # app.config['MAIL_PORT'] = os.getenv('MAIL_PORT')

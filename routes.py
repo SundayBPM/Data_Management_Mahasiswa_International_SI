@@ -1,11 +1,15 @@
-from flask import flash, render_template, request, redirect, url_for, session, make_response
+from flask import flash, render_template, request, redirect, url_for, session, make_response, current_app, send_from_directory
+from werkzeug.utils import secure_filename
 from models import User, Mahasiswa, ExchangeOutbound, Bpp
 from collections import Counter
 from flask import jsonify
 from datetime import datetime
 from sqlalchemy import func
+import os
 
 def register_routes(app, db):
+
+    # dir_upload = current_app.config['UPLOAD_DIRECTORY']
 
     @app.after_request
     def add_cache_headers(response):
@@ -178,6 +182,9 @@ def register_routes(app, db):
 
         user_id = session.get('id')
         if request.method == 'GET':
+            # allowed_extensions = current_app.config['ALLOWED_EXTENSIONS']
+            # files = os.listdir(dir_upload)
+            # docs = []
             student_inf = db.session.query(Mahasiswa).filter(Mahasiswa.nim == user_id).first()
             iisma_inf = db.session.query(ExchangeOutbound).filter(ExchangeOutbound.nim == user_id).first()
             return render_template('iisma.html', student_inf=student_inf, iisma_inf=iisma_inf)
@@ -199,6 +206,16 @@ def register_routes(app, db):
             exch_info.gpa = request.form['gpa_at_iisma']
             update_gpa = request.form['latest_update_iisma']
             exch_info.update_gpa = datetime.strptime(update_gpa, '%Y-%m-%d').date()
+            
+            #Field untuk menambah file dari user lalu menghapus file lama
+            file_transcript = request.files['transcript']
+            if file_transcript: #cek apakah ada file yang di input user
+                if os.path.exists(f'static/uploads/{exch_info.transcript_telu}'):  #menghapus file lama
+                    os.remove(f'static/uploads/{exch_info.transcript_telu}')
+                    
+                file_transcript.save(f'static/uploads/{file_transcript.filename}') #menyimpan file baru
+                exch_info.transcript_telu = file_transcript.filename
+            
             db.session.commit()
             
             return redirect(url_for('iisma'))
@@ -320,3 +337,8 @@ def register_routes(app, db):
         exch_info.update_gpa = datetime.strptime(update_gpa, '%Y-%m-%d').date()
         db.session.commit()
         return redirect(url_for('iisma_view', user_id=user_id))
+    
+    @app.route('/download/<filename>')
+    def download_file(filename):
+        dir_upload = current_app.config['UPLOAD_DIRECTORY']
+        return send_from_directory(dir_upload, filename)
