@@ -23,7 +23,8 @@ class Mahasiswa(db.Model):
 
 class ExchangeOutbound(db.Model):
     __tablename__ = 'exchange_outbound'
-    nim = db.Column(db.Integer, db.ForeignKey('mahasiswa.nim'), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    nim = db.Column(db.Integer, db.ForeignKey('mahasiswa.nim'))
     student_folder = db.Column(db.Integer, nullable=True)
     status = db.Column(db.String, nullable=True)
     location = db.Column(db.String, nullable=True)

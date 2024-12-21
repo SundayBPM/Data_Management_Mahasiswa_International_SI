@@ -168,7 +168,7 @@
             <div class="card-body">
               <div class="mb-3">
                 <label for="others_docs" class="form-label">File:</label>
-                <input type="file" class="form-control" id="others_docs" name="others_docs" aria-describedby="emailHelp">
+                <input type="file" class="form-control" id="others_docs" name="others_docs" aria-describedby="emailHelp" multiple>
                 <div id="emailHelp" class="form-text">Submit your others document</div>
                 {% if iisma_inf.others_docs %}
                 <p>File sudah diupload: <strong>{{ iisma_inf.others_docs }}</strong></p>
