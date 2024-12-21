@@ -32,6 +32,7 @@ class ExchangeOutbound(db.Model):
     intake = db.Column(db.Date, nullable=True)
     from_date = db.Column(db.Date, nullable=True)
     until = db.Column(db.Date, nullable=True)
+    letter_of_Acc = db.Column(db.String, nullable=True)
     sem_at_telu = db.Column(db.String, nullable=True)
     sem_at_exch = db.Column(db.String, nullable=True)
     gpa = db.Column(db.String, nullable=True)
@@ -41,6 +42,7 @@ class ExchangeOutbound(db.Model):
     folder = db.Column(db.String, nullable=True)
     jenis_exchange = db.Column(db.String, nullable=True)
     student_detail = db.Column(db.String, nullable=True)
+    others_docs = db.Column(db.String, nullable=True)
     
     def to_dict(self):
         return {

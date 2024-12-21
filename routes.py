@@ -207,7 +207,7 @@ def register_routes(app, db):
             update_gpa = request.form['latest_update_iisma']
             exch_info.update_gpa = datetime.strptime(update_gpa, '%Y-%m-%d').date()
             
-            #Field untuk menambah file dari user lalu menghapus file lama
+            #Field untuk menambah file transcript dari user lalu menghapus file lama
             file_transcript = request.files['transcript']
             if file_transcript: #cek apakah ada file yang di input user
                 if os.path.exists(f'static/uploads/{exch_info.transcript_telu}'):  #menghapus file lama
@@ -215,6 +215,33 @@ def register_routes(app, db):
                     
                 file_transcript.save(f'static/uploads/{file_transcript.filename}') #menyimpan file baru
                 exch_info.transcript_telu = file_transcript.filename
+            
+            #Field untuk menambah file transcript_at_iisma dari user lalu menghapus file lama
+            file_transcript_iisma = request.files['transcript_at_iisma']
+            if file_transcript_iisma: #cek apakah ada file yang di input user
+                if os.path.exists(f'static/uploads/{exch_info.transcript_exch}'):  #menghapus file lama
+                    os.remove(f'static/uploads/{exch_info.transcript_exch}')
+                    
+                file_transcript_iisma.save(f'static/uploads/{file_transcript_iisma.filename}') #menyimpan file baru
+                exch_info.transcript_exch = file_transcript_iisma.filename
+            
+            #Field untuk menambah file letter_of_Acc dari user lalu menghapus file lama
+            letter_of_Acc = request.files['letter_of_Acc']
+            if letter_of_Acc: #cek apakah ada file yang di input user
+                if os.path.exists(f'static/uploads/{exch_info.letter_of_Acc}'):  #menghapus file lama
+                    os.remove(f'static/uploads/{exch_info.letter_of_Acc}')
+                    
+                letter_of_Acc.save(f'static/uploads/{letter_of_Acc.filename}') #menyimpan file baru
+                exch_info.letter_of_Acc = letter_of_Acc.filename
+            
+            #Field untuk menambah file others_docs dari user lalu menghapus file lama
+            others_docs = request.files['others_docs']
+            if others_docs: #cek apakah ada file yang di input user
+                if os.path.exists(f'static/uploads/{exch_info.others_docs}'):  #menghapus file lama
+                    os.remove(f'static/uploads/{exch_info.others_docs}')
+                    
+                others_docs.save(f'static/uploads/{others_docs.filename}') #menyimpan file baru
+                exch_info.others_docs = others_docs.filename
             
             db.session.commit()
             
