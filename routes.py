@@ -429,15 +429,17 @@ def register_routes(app, db):
             student_inf = db.session.query(Mahasiswa).filter(Mahasiswa.nim == user_id).first()
             iisma_inf = db.session.query(ExchangeOutbound).filter(
                 ExchangeOutbound.nim == user_id,
-                ExchangeOutbound.jenis_exchange == 'exchange').first()
+                ExchangeOutbound.jenis_exchange == 'student_exchange').first()
+            print(iisma_inf)
             return render_template('exchange.html', student_inf=student_inf, iisma_inf=iisma_inf)
         
         elif request.method == 'POST':
             # Check apakah user sudah pernah mendaftar iisma atau belum
             exch_info = db.session.query(ExchangeOutbound).filter(
                 ExchangeOutbound.nim == user_id,
-                ExchangeOutbound.jenis_exchange == 'exchange').first()
+                ExchangeOutbound.jenis_exchange == 'student_exchange').first()
             if exch_info is None:
+
                 # Ambil nilai dari form, None jika tidak diisi
                 intake_value = request.form.get('intake', '').strip()  # Ambil nilai atau kosong
                 print(intake_value)
