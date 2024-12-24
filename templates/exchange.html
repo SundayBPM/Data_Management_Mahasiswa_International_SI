@@ -6,9 +6,9 @@
   <div class="container-fluid">
     <div class="card">
       {% if session.get('role') == 'mahasiswa' %}
-      <form action="{{ url_for('iisma')}}" method="post">
+      <form action="{{ url_for('exchange')}}" method="post" enctype="multipart/form-data">
       {% elif session.get('role') == 'dosen' %}
-      <form action="{{ url_for('iisma_update', user_id=student_inf.nim)}}" method="post">
+      <form action="{{ url_for('exchange_update', user_id=student_inf.nim)}}" method="post" enctype="multipart/form-data">
       {% endif %}
         <div class="card-body">
           <h5 class="card-title fw-semibold mb-4">Student Information</h5>
@@ -16,18 +16,18 @@
             <div class="card-body">
               <div class="mb-3">
                 <label for="nama" class="form-label">nama: </label>
-                <input type="text" class="form-control" id="nama" name="nama" value="{{ student_inf.nama }}" readonly aria-describedby="emailHelp" style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;" >
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <input type="text" class="form-control" id="nama" name="nama" value="{{ student_inf.nama }}" readonly aria-describedby="emailHelp" style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;">
+                <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
               </div>
               <div class="mb-3">
                 <label for="nim" class="form-label">NIM:</label>
                 <input type="text" class="form-control" id="nim" name="nim" value="{{ student_inf.nim }}" readonly aria-describedby="emailHelp" style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;" >
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
               </div>
               <div class="mb-3">
                 <label for="wali" class="form-label">Wali:</label>
-                <input type="text" class="form-control" id="wali" name="wali" value="{{ student_inf.wali }}" readonly aria-describedby="emailHelp" style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;" >
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <input type="text" class="form-control" id="wali" name="wali" value="{{ student_inf.wali }}" readonly aria-describedby="emailHelp" style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;">
+                <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
               </div>
             </div>
           </div>
@@ -35,8 +35,7 @@
           <div class="card">
             <div class="card-body">
               <div class="mb-3">
-                <label for="disabledSelect" class="form-label">Disabled select menu</label>
-                {% if session.get('role') == 'dosen' %}
+                <label for="disabledSelect" class="form-label">Status</label>
                 <select id="status" name="status" class="form-select">
                   <option value="interested" {% if iisma_inf.status == 'interested' %}selected{% endif %}>Interested</option>
                   <option value="applying" {% if iisma_inf.status == 'applying' %}selected{% endif %}>Applying</option>
@@ -45,41 +44,46 @@
                   <option value="on-going" {% if iisma_inf.status == 'on-going' %}selected{% endif %}>On Going</option>
                   <option value="finished" {% if iisma_inf.status == 'finished' %}selected{% endif %}>Finished</option>
                 </select>
-                {% elif session.get('role') == 'mahasiswa' %}
-                <input type="text" class="form-control" id="status" name="status" value="{{iisma_inf.status}}" readonly aria-describedby="emailHelp">
-                {% endif %}
-                <!-- <label for="status" class="form-label">Status: </label> -->
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <div id="emailHelp" class="form-text">Select your current status</div>
               </div>
               <div class="mb-3">
                 <label for="location" class="form-label">Location:</label>
-                <input type="text" class="form-control" id="location" name="location" value="{{ iisma_inf.location}}" aria-describedby="emailHelp" {% if session.get('role') == 'mahasiswa' %} readonly style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;" {% endif %}>
+                <input type="text" class="form-control" id="location" name="location" value="{{ iisma_inf.location}}" aria-describedby="emailHelp" {% if session.get('role') == 'mahasiswa' %} {% endif %}>
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
                 <label for="univ" class="form-label">University:</label>
-                <input type="text" class="form-control" id="univ" name="univ" value="{{iisma_inf.univ}}" aria-describedby="emailHelp" {% if session.get('role') == 'mahasiswa' %} readonly style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;" {% endif %}>
+                <input type="text" class="form-control" id="univ" name="univ" value="{{iisma_inf.univ}}" aria-describedby="emailHelp" {% if session.get('role') == 'mahasiswa' %} {% endif %}>
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
                 <label for="intake_year" class="form-label">Intake Year:</label>
-                <input type="text" class="form-control" id="intake_year" name="intake_year" value="{{iisma_inf.intake_year}}" aria-describedby="emailHelp" {% if session.get('role') == 'mahasiswa' %} readonly style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;" {% endif %}>
+                <input type="text" class="form-control" id="intake_year" name="intake_year" value="{{iisma_inf.intake_year}}" aria-describedby="emailHelp" >
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
                 <label for="intake" class="form-label">Intake:</label>
-                <input type="date" class="form-control" id="intake" value="{{iisma_inf.intake}}" name="intake" aria-describedby="emailHelp" {% if session.get('role') == 'mahasiswa' %} readonly style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;" {% endif %}>
+                <input type="date" class="form-control" id="intake" value="{{iisma_inf.intake}}" name="intake" aria-describedby="emailHelp" >
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
                 <label for="from" class="form-label">From:</label>
-                <input type="date" class="form-control" id="from" name="from" value="{{ iisma_inf.from_date }}" aria-describedby="emailHelp" {% if session.get('role') == 'mahasiswa' %} readonly style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;" {% endif %}>
+                <input type="date" class="form-control" id="from" name="from" value="{{ iisma_inf.from_date }}" aria-describedby="emailHelp" >
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
                 <label for="until" class="form-label">Until:</label>
-                <input type="date" class="form-control" id="until" value="{{ iisma_inf.until }}" name="until" aria-describedby="emailHelp" {% if session.get('role') == 'mahasiswa' %} readonly style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da;" {% endif %}>
+                <input type="date" class="form-control" id="until" name="until" value="{{ iisma_inf.until }}" aria-describedby="emailHelp" >
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+              </div>
+              <div class="mb-3">
+                <label for="letter_of_Acc" class="form-label">Letter of Acceptance:</label>
+                <input type="file" class="form-control" id="letter_of_Acc" name="letter_of_Acc" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">Submit your Letter of Acceptance</div>
+                {% if iisma_inf.letter_of_Acc %}
+                <p>File sudah diupload: <strong>{{ iisma_inf.letter_of_Acc }}</strong></p>
+                <a href="{{ url_for('download_file', filename=iisma_inf.letter_of_Acc) }}" class="btn btn-success" download>Download File</a>
+                {% endif %}
               </div>
             </div>
           </div>
@@ -87,8 +91,20 @@
           <div class="card">
             <div class="card-body">
               <div class="mb-3">
-                <label for="semester" class="form-label">Semester: </label>
-                <input type="text" class="form-control" id="semester" name="semester" value="{{ iisma_inf.sem_at_telu}}" aria-describedby="emailHelp">
+                <!-- <label for="semester" class="form-label">Semester: </label>
+                <input type="text" class="form-control" id="semester" name="semester" value="{{ iisma_inf.sem_at_telu}}" aria-describedby="emailHelp"> -->
+                <select id="semester" name="semester" class="form-select">
+                  <option value="Semester 1" {% if iisma_inf.sem_at_telu == 'Semester 1' %}selected{% endif %}>Semester 1</option>
+                  <option value="Semester 2" {% if iisma_inf.sem_at_telu == 'Semester 2' %}selected{% endif %}>Semester 2</option>
+                  <option value="Semester 3" {% if iisma_inf.sem_at_telu == 'Semester 3' %}selected{% endif %}>Semester 3</option>
+                  <option value="Semester 4" {% if iisma_inf.sem_at_telu == 'Semester 4' %}selected{% endif %}>Semester 4</option>
+                  <option value="Semester 5" {% if iisma_inf.sem_at_telu == 'Semester 5' %}selected{% endif %}>Semester 5</option>
+                  <option value="Semester 6" {% if iisma_inf.sem_at_telu == 'Semester 6' %}selected{% endif %}>Semester 6</option>
+                  <option value="Semester 7" {% if iisma_inf.sem_at_telu == 'Semester 7' %}selected{% endif %}>Semester 7</option>
+                  <option value="Semester 8" {% if iisma_inf.sem_at_telu == 'Semester 8' %}selected{% endif %}>Semester 8</option>
+                  <option value="Semester 9" {% if iisma_inf.sem_at_telu == 'Semester 9' %}selected{% endif %}>Semester 9</option>
+                  <option value="Semester 10" {% if iisma_inf.sem_at_telu == 'Semester 10' %}selected{% endif %}>Semester 10</option>
+                </select>
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
@@ -98,17 +114,33 @@
               </div>
               <div class="mb-3">
                 <label for="transcript" class="form-label">Transcript:</label>
-                <input type="text" class="form-control" id="transcript" name="transcript" value="{{ iisma_inf.transcript_telu }}" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <input type="file" class="form-control" id="transcript" name="transcript" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">Submit the latest transcript</div>
+                {% if iisma_inf.transcript_telu %}
+                <p>File sudah diupload: <strong>{{ iisma_inf.transcript_telu }}</strong></p>
+                <a href="{{ url_for('download_file', filename=iisma_inf.transcript_telu) }}" class="btn btn-success" download>Download File</a>
+                {% endif %}
               </div>
             </div>
           </div>
-          <h5 class="card-title fw-semibold mb-4">At Student Exchange University</h5>
+          <h5 class="card-title fw-semibold mb-4">At Exchange University</h5>
           <div class="card">
             <div class="card-body">
               <div class="mb-3">
-                <label for="semester_at_iisma" class="form-label">Semester: </label>
-                <input type="text" class="form-control" id="semester_at_iisma" name="semester_at_iisma" value="{{ iisma_inf.sem_at_exch }}" aria-describedby="emailHelp">
+                <label for="disabledSelect" class="form-label">Semester</label>
+                <select id="semester_at_iisma" name="semester_at_iisma" class="form-select">
+                  <option value="Semester 1" {% if iisma_inf.sem_at_exch == 'Semester 1' %}selected{% endif %}>Semester 1</option>
+                  <option value="Semester 2" {% if iisma_inf.sem_at_exch == 'Semester 2' %}selected{% endif %}>Semester 2</option>
+                  <option value="Semester 3" {% if iisma_inf.sem_at_exch == 'Semester 3' %}selected{% endif %}>Semester 3</option>
+                  <option value="Semester 4" {% if iisma_inf.sem_at_exch == 'Semester 4' %}selected{% endif %}>Semester 4</option>
+                  <option value="Semester 5" {% if iisma_inf.sem_at_exch == 'Semester 5' %}selected{% endif %}>Semester 5</option>
+                  <option value="Semester 6" {% if iisma_inf.sem_at_exch == 'Semester 6' %}selected{% endif %}>Semester 6</option>
+                  <option value="Semester 7" {% if iisma_inf.sem_at_exch == 'Semester 7' %}selected{% endif %}>Semester 7</option>
+                  <option value="Semester 8" {% if iisma_inf.sem_at_exch == 'Semester 8' %}selected{% endif %}>Semester 8</option>
+                  <option value="Semester 9" {% if iisma_inf.sem_at_exch == 'Semester 9' %}selected{% endif %}>Semester 9</option>
+                  <option value="Semester 10" {% if iisma_inf.sem_at_exch == 'Semester 10' %}selected{% endif %}>Semester 10</option>
+                </select>
+                <!-- <label for="status" class="form-label">Status: </label> -->
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
@@ -119,11 +151,30 @@
               <div class="mb-3">
                 <label for="latest_update_iisma" class="form-label">Latest Update:</label>
                 <input type="date" class="form-control" id="latest_update_iisma" name="latest_update_iisma" value="{{ iisma_inf.update_gpa}}" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>              </div>
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>              
+              </div>
+                <div class="mb-3">
+                  <label for="transcript_at_iisma" class="form-label">Tranascript:</label>
+                  <input type="file" class="form-control" id="transcript_at_iisma" name="transcript_at_iisma" aria-describedby="emailHelp">
+                  <div id="emailHelp" class="form-text">Submit the latest transcript</div>
+                  {% if iisma_inf.transcript_telu %}
+                  <p>File sudah diupload: <strong>{{ iisma_inf.transcript_exch }}</strong></p>
+                  <a href="{{ url_for('download_file', filename=iisma_inf.transcript_exch) }}" class="btn btn-success" download>Download File</a>
+                  {% endif %}
+                </div>
+            </div>
+          </div>
+          <h5 class="card-title fw-semibold mb-4">Others Document</h5>
+          <div class="card">
+            <div class="card-body">
               <div class="mb-3">
-                <label for="transcript_at_iisma" class="form-label">Transcript:</label>
-                <input type="text" class="form-control" id="transcript_at_iisma" name="transcript_at_iisma" value="{{ iisma_inf.transcript_exch }}" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <label for="others_docs" class="form-label">File:</label>
+                <input type="file" class="form-control" id="others_docs" name="others_docs" aria-describedby="emailHelp" multiple>
+                <div id="emailHelp" class="form-text">Submit your others document</div>
+                {% if iisma_inf.others_docs %}
+                <p>File sudah diupload: <strong>{{ iisma_inf.others_docs }}</strong></p>
+                <a href="{{ url_for('download_file', filename=iisma_inf.others_docs) }}" class="btn btn-success" download>Download File</a>
+                {% endif %}
               </div>
             </div>
           </div>
@@ -155,6 +206,7 @@
           </div>
           {% endif %}
           <button type="submit" class="btn btn-primary">Submit</button>
+          <h5>TESTING</h5>
         </div>
       </form>
     </div>

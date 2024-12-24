@@ -58,22 +58,22 @@
               </div>
               <div class="mb-3">
                 <label for="intake_year" class="form-label">Intake Year:</label>
-                <input type="text" class="form-control" id="intake_year" name="intake_year" value="{{iisma_inf.intake_year}}" aria-describedby="emailHelp" {% if session.get('role') == 'mahasiswa' %} {% endif %}>
+                <input type="text" class="form-control" id="intake_year" name="intake_year" value="{{iisma_inf.intake_year}}" aria-describedby="emailHelp" >
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
                 <label for="intake" class="form-label">Intake:</label>
-                <input type="date" class="form-control" id="intake" value="{{iisma_inf.intake}}" name="intake" aria-describedby="emailHelp" {% if session.get('role') == 'mahasiswa' %} {% endif %}>
+                <input type="date" class="form-control" id="intake" value="{{iisma_inf.intake}}" name="intake" aria-describedby="emailHelp" >
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
                 <label for="from" class="form-label">From:</label>
-                <input type="date" class="form-control" id="from" name="from" value="{{ iisma_inf.from_date }}" aria-describedby="emailHelp" {% if session.get('role') == 'mahasiswa' %} {% endif %}>
+                <input type="date" class="form-control" id="from" name="from" value="{{ iisma_inf.from_date }}" aria-describedby="emailHelp" >
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
                 <label for="until" class="form-label">Until:</label>
-                <input type="date" class="form-control" id="until" value="{{ iisma_inf.until }}" name="until" aria-describedby="emailHelp" {% if session.get('role') == 'mahasiswa' %} {% endif %}>
+                <input type="date" class="form-control" id="until" name="until" value="{{ iisma_inf.until }}" aria-describedby="emailHelp" >
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
@@ -151,7 +151,8 @@
               <div class="mb-3">
                 <label for="latest_update_iisma" class="form-label">Latest Update:</label>
                 <input type="date" class="form-control" id="latest_update_iisma" name="latest_update_iisma" value="{{ iisma_inf.update_gpa}}" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>              </div>
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>              
+              </div>
                 <div class="mb-3">
                   <label for="transcript_at_iisma" class="form-label">Tranascript:</label>
                   <input type="file" class="form-control" id="transcript_at_iisma" name="transcript_at_iisma" aria-describedby="emailHelp">

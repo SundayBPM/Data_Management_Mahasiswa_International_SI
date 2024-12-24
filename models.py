@@ -23,8 +23,8 @@ class Mahasiswa(db.Model):
 
 class ExchangeOutbound(db.Model):
     __tablename__ = 'exchange_outbound'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    nim = db.Column(db.Integer, db.ForeignKey('mahasiswa.nim'))
+    id_ = db.Column(db.String, primary_key=True)
+    nim = db.Column(db.Integer, db.ForeignKey('mahasiswa.nim', name='fk_exchange_outbound_nim'))
     student_folder = db.Column(db.Integer, nullable=True)
     status = db.Column(db.String, nullable=True)
     location = db.Column(db.String, nullable=True)
@@ -59,7 +59,8 @@ class ExchangeOutbound(db.Model):
 
 class Bpp(db.Model):
     __tablename__ = 'bpp'
-    nim = db.Column(db.Integer, db.ForeignKey('mahasiswa.nim'), primary_key=True)
+    nim = db.Column(db.Integer, db.ForeignKey('mahasiswa.nim'))
+    id_program = db.Column(db.String, nullable=True, primary_key=True)
     discount = db.Column(db.Integer, nullable=True)
-    period = db.Column(db.Date, nullable=True)
+    period = db.Column(db.String, nullable=True)
     notes = db.Column(db.String, nullable=True)
