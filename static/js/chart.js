@@ -13,7 +13,7 @@ fetch('/ExchangeIISMA')
                     },
                     title: {
                         display: true,
-                        text: 'Testing'
+                        // text: 'Testing'
                     }
                 }
             }

@@ -17,15 +17,13 @@ class Mahasiswa(db.Model):
     angkatan = db.Column(db.Integer, nullable=False)
     kode_angkatan = db.Column(db.String, nullable=False)
     tanggal_masuk = db.Column(db.Date, nullable=False)
-    tanggal_keluar = db.Column(db.Date, nullable=False)
+    tanggal_keluar = db.Column(db.Date, nullable=True)
     gpa = db.Column(db.String, nullable=False)
-    esyp = db.Column(db.String, nullable=False)    
 
 class ExchangeOutbound(db.Model):
     __tablename__ = 'exchange_outbound'
     id_ = db.Column(db.String, primary_key=True)
     nim = db.Column(db.Integer, db.ForeignKey('mahasiswa.nim', name='fk_exchange_outbound_nim'))
-    student_folder = db.Column(db.Integer, nullable=True)
     status = db.Column(db.String, nullable=True)
     location = db.Column(db.String, nullable=True)
     univ = db.Column(db.String, nullable=True)
@@ -40,7 +38,6 @@ class ExchangeOutbound(db.Model):
     update_gpa = db.Column(db.Date, nullable=True)
     transcript_telu = db.Column(db.String, nullable=True)
     transcript_exch = db.Column(db.String, nullable=True)
-    folder = db.Column(db.String, nullable=True)
     jenis_exchange = db.Column(db.String, nullable=True)
     student_detail = db.Column(db.String, nullable=True)
     others_docs = db.Column(db.String, nullable=True)
